@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     depends_on:
       - rabbitmq
+      - redis
   frontend:
     build: ./frontend
     ports:
@@ -24,4 +25,9 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    restart: unless-stopped
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
     restart: unless-stopped
